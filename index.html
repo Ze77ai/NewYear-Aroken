@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Year 2026</title>
+    <link rel="icon" href="icon.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            color: #fff;
+            overflow-x: hidden;
+            position: relative;
+            background-image: url(background.jpg);
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+        }
+
+        .stars {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: #fff;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+
+        @keyframes twinkle {
+
+            0%,
+            100% {
+                opacity: 0.3;
+            }
+
+            50% {
+                opacity: 1;
+            }
+        }
+
+        .snowflake {
+            position: fixed;
+            top: -10px;
+            color: white;
+            font-size: 1em;
+            user-select: none;
+            z-index: 1000;
+            pointer-events: none;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+            }
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+            animation: fadeIn 1s ease-out;
+        }
+
+        .header h1 {
+            font-size: 3em;
+            margin-bottom: 15px;
+            background: linear-gradient(45deg, #ff6b6b, #ffd93d, #6bcf7f, #4ecdc4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 30px rgba(255, 107, 107, 0.5);
+        }
+
+        .letter-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 50px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            animation: slideUp 1s ease-out;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .letter-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #ff6b6b, #ffd93d, #6bcf7f, #4ecdc4, #ff6b6b);
+            background-size: 200% 100%;
+            animation: shimmer 3s linear infinite;
+        }
+
+        @keyframes shimmer {
+            to {
+                background-position: 200% 0;
+            }
+        }
+
+        .welcome {
+            font-size: 1.8em;
+            margin-bottom: 30px;
+            color: #ff3d3d;
+            font-weight: bold;
+        }
+
+        .letter-text {
+            line-height: 1.8;
+            font-size: 1.1em;
+            margin-bottom: 30px;
+            color: #e9f4ff;
+        }
+
+        .letter-text p {
+            margin-bottom: 20px;
+        }
+
+        .wish-list {
+            list-style: none;
+            margin: 25px 0;
+        }
+
+        .wish-list li {
+            padding: 12px 0;
+            padding-left: 35px;
+            position: relative;
+            font-size: 1.05em;
+            transition: transform 0.3s ease;
+        }
+
+        .wish-list li:hover {
+            transform: translateX(10px);
+        }
+
+        .wish-list li::before {
+            content: '★';
+            position: absolute;
+            left: 0;
+            top: 7px;
+            color: #fa3b3b;
+            font-size: 1.3em;
+        }
+
+        .wishlist {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .wish-item {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            padding: 15px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            text-align: left;
+            transition: all 0.3s ease;
+            cursor: default;
+        }
+
+        .wish-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 93px;
+            width: 7px;
+            background: linear-gradient(90deg, #ff6b6b, #ffd93d, #6bcf7f, #4ecdc4, #ff6b6b);
+            border-top-left-radius: 50px;
+            border-bottom-left-radius: 50px;
+            background-size: 200% 100%;
+            animation: shimmer 3s linear infinite;
+        }
+
+        .wish-item:hover {
+            background: rgba(78, 205, 196, 0.08);
+            box-shadow: 0 5px 15px rgba(255, 255, 255, 0.15);
+            transform: scale(1.02);
+        }
+
+        .wish-icon {
+            font-size: 2rem;
+            margin-right: 15px;
+        }
+
+        .wish-title {
+            font-weight: 800;
+            color: #ff3d3d;
+            display: block;
+        }
+
+        .wish-desc {
+            font-size: 0.9rem;
+            color: #e9f4ff;
+        }
+
+        .signature {
+            text-align: right;
+            margin-top: 40px;
+            font-size: 1.2em;
+            color: #ff3d3d;
+            font-style: italic;
+        }
+
+        .send-btn {
+            position: relative;
+            background: linear-gradient(135deg, #e11d48 0%, #be123c 100%);
+            color: #e9f4ff;
+            border: none;
+            padding: 18px 50px;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 700;
+            box-shadow:
+                0 10px 20px rgba(225, 29, 72, 0.4),
+                0 0 0 4px rgba(225, 29, 72, 0.2);
+            transition: all 0.3s ease;
+            font-family: 'Montserrat', sans-serif;
+            overflow: hidden;
+        }
+
+        .send-btn:hover {
+            transform: translateY(-3px);
+            box-shadow:
+                0 20px 30px rgba(225, 29, 72, 0.5),
+                0 0 0 4px rgba(225, 29, 72, 0.3);
+        }
+
+        .send-btn:active {
+            transform: translateY(1px);
+        }
+
+        /* Shine effect on button */
+        .btn-shine {
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.3) 50%, rgba(255, 255, 255, 0) 100%);
+            transform: skewX(-20deg);
+            animation: shine 3s infinite;
+        }
+
+        .footer {
+            margin-left: 30%
+        }
+
+        @keyframes shine {
+            0% {
+                left: -100%;
+            }
+
+            20% {
+                left: 200%;
+            }
+
+            100% {
+                left: 200%;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="stars" id="stars"></div>
+
+    <div class="container">
+        <div class="header">
+            <h1>Письмо IT-Дедушке Морозу</h1>
+        </div>
+
+        <div class="letter-card">
+            <div class="welcome">
+                Здравствуй, IT-Дедушка Мороз!🎅
+            </div>
+
+            <div class="letter-text">
+                <p>
+                    Пускай ушедший год был самым сложным в рабочих вопросах, а в новом — всё будет только лучше.
+                </p>
+
+                <p>
+                    Я мечтаю о щедрых и адекватных заказчиках, стабильном потоке проектов и своевременной оплате.
+                    <br>
+                    Пусть мой код будет чистым, серверы — быстрыми и безотказными, а вдохновение — нескончаемым.
+                    <br>
+                    И, конечно же, чтобы все баги находились только в тестовом окружении!
+                </p>
+
+                <h2>В этом Новом году:</h2>
+                <ul class="wish-list">
+                    <li>Я завершу курс на AROKEN.ru</li>
+                    <li>Выйду на фриланс и начну стабильно зарабатывать</li>
+                    <li>Буду больше уделять времени программированию, а не доте)</li>
+                </ul>
+
+                <div class="wishlist">
+                    <div class="wish-item">
+                        <span class="wish-icon">🎧</span>
+                        <div>
+                            <span class="wish-title">Наушники с шумоподавлением</span>
+                            <span class="wish-desc">Чтобы забыть о внешнем мире и слышать только код и идеи.</span>
+                        </div>
+                    </div>
+
+                    <div class="wish-item">
+                        <span class="wish-icon">🖱️</span>
+                        <div>
+                            <span class="wish-title">Беспроводная мышь с лёгким кликом</span>
+                            <span class="wish-desc">Чтобы прокручивать задачи быстрее, а рука никогда не
+                                уставала.</span>
+                        </div>
+                    </div>
+
+                    <div class="wish-item">
+                        <span class="wish-icon">⌨️</span>
+                        <div>
+                            <span class="wish-title">Механическая клавиатура</span>
+                            <span class="wish-desc">Чтобы каждый ввод был уверенным, а ритм печати вёл к гениальным
+                                решениям.</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="signature">
+                    <p style="font-size: 1.3em; margin-top: 10px;">Владислав</p>
+                </div>
+
+                <div class="footer">
+                    <button class="send-btn" onclick="playSound()">
+                        <span class="btn-text">Отправить письмо</span>
+                        <span class="btn-shine"></span>
+                    </button>
+                </div>
+                
+            </div>
+        </div>
+
+        <script>
+            
+            // Воспроизводство звука
+            const audio = new Audio('sound.mp3');
+            function playSound(){
+                audio.currentTime = 0;
+                audio.play();
+            }
+
+            // Звезды
+            const starsContainer = document.getElementById('stars');
+            for (let i = 0; i < 100; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                starsContainer.appendChild(star);
+            }
+
+            // Снежинки
+            function createSnowflake() {
+                const snowflake = document.createElement('div');
+                snowflake.className = 'snowflake';
+                snowflake.innerHTML = ['❄', '❅', '❆'][Math.floor(Math.random() * 3)];
+                snowflake.style.left = Math.random() * 100 + '%';
+                snowflake.style.fontSize = (Math.random() * 1 + 0.5) + 'em';
+                snowflake.style.opacity = Math.random() * 0.6 + 0.4;
+                snowflake.style.animationDuration = (Math.random() * 5 + 5) + 's';
+                document.body.appendChild(snowflake);
+
+                setTimeout(() => {
+                    snowflake.remove();
+                }, 10000);
+            }
+
+            setInterval(createSnowflake, 200);
+
+            for (let i = 0; i < 30; i++) {
+                setTimeout(createSnowflake, i * 100);
+            }
+        </script>
+</body>
+
+</html>
